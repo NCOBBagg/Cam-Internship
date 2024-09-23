@@ -1,5 +1,5 @@
 .card-skeleton{
-    display: flex;
+    display: flex; 
     flex-direction: column;
     position: relative;
 }
@@ -38,6 +38,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative; /* Add this line */
+    position: relative; 
     top: 26px;
 }
