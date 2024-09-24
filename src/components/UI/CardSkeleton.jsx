@@ -1,10 +1,12 @@
 import React from "react";
 import { FaCheckCircle } from "react-icons/fa";
 import Skeleton from "react-loading-skeleton";
-import "../../css/styles/Skeleton.css";
 
-const CardSkeleton = ({ cards }) => {
-  return Array(cards)
+
+
+
+const CardSkeleton = () => {
+  return Array(4)
     .fill(0)
     .map((_, index) => (
       <div className="card-skeleton" key={index}>

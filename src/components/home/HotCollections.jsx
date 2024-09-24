@@ -11,25 +11,22 @@ const HotCollections = () => {
   const [collections, setCollections] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  async function fetchCollections() {
-    setLoading(true);
-    const response = await axios
-      .get(
-        "https://us-central1-nft-cloud-functions.cloudfunctions.net/hotCollections"
-      )
-      .then((response) => {
-        setCollections(response.data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error("Error fetching data", error);
-        setLoading(false);
-      });
-  }
-
   useEffect(() => {
     fetchCollections();
   }, []);
+
+  async function fetchCollections() {
+    try {
+      const { data } = await axios.get(
+        "https://us-central1-nft-cloud-functions.cloudfunctions.net/hotCollections"
+      );
+      setCollections(data);
+      setLoading(false);
+    } catch (error) {
+      console.error("Error fetching data", error);
+      setLoading(false);
+    }
+  }
 
   const responsive = {
     1440: {
@@ -56,7 +53,19 @@ const HotCollections = () => {
               <div className="small-border bg-color-2"></div>
             </div>
           </div>
-          {collections.length > 0 && (
+          {loading ? (
+            new Array(1).fill(0).map((index) => (
+              <OwlCarousel className=""
+              loop
+              margin={10}
+              responsive={responsive}
+              items={4}
+              dots={false}
+              nav>
+                <CardSkeleton />
+              </OwlCarousel>
+            ))
+          ) : (
             <OwlCarousel
               className=""
               loop
@@ -66,41 +75,37 @@ const HotCollections = () => {
               dots={false}
               nav
             >
-              {loading ? (
-                <CardSkeleton />
-              ) : (
-                collections.slice(0, 6).map((collections, index) =>(
-                  <div className="" key={index}>
-                    <div className="nft_coll">
-                      <div className="nft_wrap">
-                        <Link to="/item-details">
-                          <img
-                            src={collections.nftImage}
-                            className="lazy img-fluid"
-                            alt=""
-                          />
-                        </Link>
-                      </div>
-                      <div className="nft_coll_pp">
-                        <Link to="/author">
-                          <img
-                            className="lazy pp-coll"
-                            src={collections.authorImage}
-                            alt=""
-                          />
-                        </Link>
-                        <i className="fa fa-check"></i>
-                      </div>
-                      <div className="nft_coll_info">
-                        <Link to="/explore">
-                          <h4>{collections.title}</h4>
-                        </Link>
-                        <span>{collections.code}</span>
-                      </div>
+              {collections.slice(0, 6).map((collections, index) => (
+                <div className="" key={index}>
+                  <div className="nft_coll">
+                    <div className="nft_wrap">
+                      <Link to="/item-details">
+                        <img
+                          src={collections.nftImage}
+                          className="lazy img-fluid"
+                          alt=""
+                        />
+                      </Link>
+                    </div>
+                    <div className="nft_coll_pp">
+                      <Link to="/author">
+                        <img
+                          className="lazy pp-coll"
+                          src={collections.authorImage}
+                          alt=""
+                        />
+                      </Link>
+                      <i className="fa fa-check"></i>
+                    </div>
+                    <div className="nft_coll_info">
+                      <Link to="/explore">
+                        <h4>{collections.title}</h4>
+                      </Link>
+                      <span>{collections.code}</span>
                     </div>
                   </div>
-                ))
-              )}
+                </div>
+              ))}
             </OwlCarousel>
           )}
         </div>
