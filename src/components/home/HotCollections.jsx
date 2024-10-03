@@ -6,6 +6,8 @@ import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
 import "react-loading-skeleton/dist/skeleton.css";
 import CardSkeleton from "../UI/CardSkeleton";
+import Skeleton from "react-loading-skeleton";
+import { FaCheckCircle } from "react-icons/fa";
 
 const HotCollections = () => {
   const [collections, setCollections] = useState([]);
@@ -55,14 +57,16 @@ const HotCollections = () => {
           </div>
           {loading ? (
             new Array(1).fill(0).map((index) => (
-              <OwlCarousel className=""
-              loop
-              margin={10}
-              responsive={responsive}
-              items={4}
-              dots={false}
-              nav>
-                <CardSkeleton />
+              <OwlCarousel
+                className=""
+                loop
+                margin={10}
+                responsive={responsive}
+                items={4}
+                dots={false}
+                nav
+              >
+                <CardSkeleton/>
               </OwlCarousel>
             ))
           ) : (

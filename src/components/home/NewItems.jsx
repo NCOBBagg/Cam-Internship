@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import OwlCarousel from "react-owl-carousel";
+import Skeleton from "react-loading-skeleton";
+import { FaCheckCircle } from "react-icons/fa";
 
 const NewItems = () => {
   const [newItems, setNewItems] = useState([]);
@@ -38,20 +40,21 @@ const NewItems = () => {
       items: 1,
     },
   };
+
   useEffect(() => {
     const interval = setInterval(() => {
-      const updatedTimers = newItems.reduce((auth, newItems) => {
-        auth[newItems.nftId] = calculateTimeLeft(newItems.expirationDate);
-        return auth;
+      const updatedTimers = newItems.reduce((acc, newItems) => {
+        acc[newItems.nftId] = calculateTimeLeft(newItems.expiryDate);
+        return acc;
       }, {});
       setTimers(updatedTimers);
     }, 1000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [newItems]);
 
-  const calculateTimeLeft = (expirationDate) => {
-    const difference = expirationDate - Date.now();
+  const calculateTimeLeft = (expiryDate) => {
+    const difference = new Date(expiryDate).getTime() - Date.now();
 
     let timeRemaining = {};
 
@@ -75,6 +78,35 @@ const NewItems = () => {
               <div className="small-border bg-color-2"></div>
             </div>
           </div>
+          {loading ? (
+            new Array(1).fill(0).map((index) => (
+              <OwlCarousel
+                className=""
+                loop
+                margin={10}
+                responsive={responsive}
+                items={4}
+                dots={false}
+                nav
+              >
+                <div className="card-skeleton" key={index}>
+                  <div className="circle__skeleton">
+                    <Skeleton circle width={40} height={40} />
+                  </div>
+                  <FaCheckCircle className="check-circle__skeleton" color="#8364E2" />
+                  <div className="left-col">
+                    <Skeleton square height={270} width={500} />
+                  </div>
+                  <div className="name__skeleton">
+                    <Skeleton width="40%" height={20} />
+                  </div>
+                  <div className="code__skeleton">
+                    <Skeleton width="80" height={20}/>
+                  </div>
+                </div>
+              </OwlCarousel>
+            ))
+          ) : (
           <OwlCarousel
             className=""
             loop
@@ -98,7 +130,7 @@ const NewItems = () => {
                       <i className="fa fa-check"></i>
                     </Link>
                   </div>
-                  {newItems.expirationDate && (
+                  {newItems.expiryDate && (
                     <div className="de_countdown">
                       {timers[newItems.nftId]?.hours}h{" "}
                       {timers[newItems.nftId]?.minutes}m{" "}
@@ -147,6 +179,7 @@ const NewItems = () => {
               </div>
             ))}
           </OwlCarousel>
+          )}
         </div>
       </div>
     </section>

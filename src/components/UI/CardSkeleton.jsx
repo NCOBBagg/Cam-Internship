@@ -16,7 +16,7 @@ const CardSkeleton = () => {
         <div className="circle__skeleton">
           <Skeleton circle width={40} height={40} />
         </div>
-        <FaCheckCircle className="check-circle__skeleton" />
+        <FaCheckCircle className="check-circle__skeleton" color="#8364E2" />
         <div className="name__skeleton">
           <Skeleton width={100} />
         </div>
