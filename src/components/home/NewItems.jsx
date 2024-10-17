@@ -4,11 +4,11 @@ import axios from "axios";
 import OwlCarousel from "react-owl-carousel";
 import Skeleton from "react-loading-skeleton";
 import { FaCheckCircle } from "react-icons/fa";
+import CountdownTimer from "../UI/CountdownTimer";
 
 const NewItems = () => {
   const [newItems, setNewItems] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [timers, setTimers] = useState({});
 
   useEffect(() => {
     async function fetchNewItems() {
@@ -41,32 +41,8 @@ const NewItems = () => {
     },
   };
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      const updatedTimers = newItems.reduce((acc, newItems) => {
-        acc[newItems.nftId] = calculateTimeLeft(newItems.expiryDate);
-        return acc;
-      }, {});
-      setTimers(updatedTimers);
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, [newItems]);
-
-  const calculateTimeLeft = (expiryDate) => {
-    const difference = new Date(expiryDate).getTime() - Date.now();
-
-    let timeRemaining = {};
-
-    if (difference > 0) {
-      timeRemaining = {
-        hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-        minutes: Math.floor((difference / 1000 / 60) % 60),
-        seconds: Math.floor((difference / 1000) % 60),
-      };
-    }
-    return timeRemaining;
-  };
+ 
+    
 
   return (
     <section id="section-items" className="no-bottom">
@@ -132,11 +108,10 @@ const NewItems = () => {
                   </div>
                   {newItems.expiryDate && (
                     <div className="de_countdown">
-                      {timers[newItems.nftId]?.hours}h{" "}
-                      {timers[newItems.nftId]?.minutes}m{" "}
-                      {timers[newItems.nftId]?.seconds}s
+                      <CountdownTimer expiryDate={newItems.expiryDate}/>
                     </div>
                   )}
+
 
                   <div className="nft__item_wrap">
                     <div className="nft__item_extra">
