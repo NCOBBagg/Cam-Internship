@@ -28,6 +28,22 @@ const Author = () => {
     }
   }
 
+  function followAuthor() {
+    if (author.clicked) {
+      setAuthor((prevState) => ({
+        ...prevState,
+        followers: prevState.followers - 1,
+        clicked: false
+      }))
+    } else {
+      setAuthor((prevState) => ({
+        ...prevState,
+        followers: prevState.followers + 1,
+        clicked: true
+      }))
+    }
+  }
+
   return (
     <div id="wrapper">
       <div className="no-bottom no-top" id="content">
@@ -101,8 +117,8 @@ const Author = () => {
                           <div className="profile_follower">
                             {author.followers}
                           </div>
-                          <Link to="#" className="btn-main">
-                            Follow
+                          <Link to="#" className="btn-main" onClick={followAuthor}>
+                           {author.clicked ? "Unfollow" : "Follow"}
                           </Link>
                         </div>
                       </div>
@@ -112,7 +128,7 @@ const Author = () => {
               )}
               <div className="col-md-12">
                 <div className="de_tab tab_simple">
-                  {author && <AuthorItems data={author.nftCollections} />}
+                  {author && <AuthorItems data={author.nftCollection} />}
                 </div>
               </div>
             </div>

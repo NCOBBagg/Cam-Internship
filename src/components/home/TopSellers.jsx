@@ -51,7 +51,7 @@ const TopSellers = () => {
                   sellers.map((sellers) => (
                 <li key={sellers.id}>
                   <div className="author_list_pp">
-                    <Link to={`/author/${sellers.id}`}>
+                    <Link to={`/author/${sellers.authorId}`}>
                       <img
                         className="lazy pp-author"
                         src={sellers.authorImage}
