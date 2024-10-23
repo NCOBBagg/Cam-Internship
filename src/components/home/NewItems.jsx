@@ -4,14 +4,14 @@ import axios from "axios";
 import OwlCarousel from "react-owl-carousel";
 import Skeleton from "react-loading-skeleton";
 import { FaCheckCircle } from "react-icons/fa";
-import "keen-slider/keen-slider.min.css";
-import { useKeenSlider } from "keen-slider/react";
 import CountdownTimer from "../UI/CountdownTimer";
+import AOS from "aos";
+import "aos/dist/aos.css";
+AOS.init();
 
 const NewItems = () => {
   const [newItems, setNewItems] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [timers, setTimers] = useState({});
 
   useEffect(() => {
     async function fetchNewItems() {
@@ -95,7 +95,7 @@ const NewItems = () => {
               dots={false}
               nav
             >
-              {newItems.map((newItems) => (
+              {newItems.slice(0, 7).map((newItems, _) => (
                 <div className="" key={newItems.id}>
                   <div className="nft__item">
                     <div className="author_list_pp">
@@ -118,7 +118,6 @@ const NewItems = () => {
                         <CountdownTimer expiryDate={newItems.expiryDate} />
                       </div>
                     )}
-
                     <div className="nft__item_wrap">
                       <div className="nft__item_extra">
                         <div className="nft__item_buttons">
@@ -137,7 +136,6 @@ const NewItems = () => {
                           </div>
                         </div>
                       </div>
-
                       <Link to={`/item-details/${newItems.nftId}`}>
                         <img
                           src={newItems.nftImage}
@@ -147,7 +145,7 @@ const NewItems = () => {
                       </Link>
                     </div>
                     <div className="nft__item_info">
-                      <Link to="/item-details">
+                      <Link to={`/item-details/${newItems.nftId}`}>
                         <h4>{newItems.title}</h4>
                       </Link>
                       <div className="nft__item_price">
