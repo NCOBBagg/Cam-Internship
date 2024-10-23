@@ -6,6 +6,9 @@ import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
 import "react-loading-skeleton/dist/skeleton.css";
 import CardSkeleton from "../UI/CardSkeleton";
+import AOS from 'aos';
+import 'aos/dist/aos.css'; 
+AOS.init();
 
 
 const HotCollections = () => {
@@ -47,7 +50,7 @@ const HotCollections = () => {
   return (
     <section id="section-collections" className="no-bottom">
       <div className="container">
-        <div className="row">
+        <div className="row" data-aos="fade" data-aos-easing="1000">
           <div className="col-lg-12">
             <div className="text-center">
               <h2>Hot Collections</h2>

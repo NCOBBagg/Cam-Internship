@@ -5,6 +5,9 @@ import OwlCarousel from "react-owl-carousel";
 import Skeleton from "react-loading-skeleton";
 import { FaCheckCircle } from "react-icons/fa";
 import CountdownTimer from "../UI/CountdownTimer";
+import AOS from 'aos';
+import 'aos/dist/aos.css'; 
+AOS.init();
 
 const NewItems = () => {
   const [newItems, setNewItems] = useState([]);
@@ -47,7 +50,7 @@ const NewItems = () => {
   return (
     <section id="section-items" className="no-bottom">
       <div className="container">
-        <div className="row">
+        <div className="row" data-aos="fade" data-aos-easing="1000">
           <div className="col-lg-12">
             <div className="text-center">
               <h2>New Items</h2>
