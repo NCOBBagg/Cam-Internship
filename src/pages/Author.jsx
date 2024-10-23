@@ -6,6 +6,7 @@ import AuthorImage from "../images/author_thumbnail.jpg";
 import axios from "axios";
 import Skeleton from "react-loading-skeleton";
 
+
 const Author = () => {
   const [author, setAuthor] = useState(null);
   const [loading, setLoading] = useState(true);
