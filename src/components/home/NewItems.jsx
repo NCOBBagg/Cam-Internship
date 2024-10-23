@@ -44,6 +44,7 @@ const NewItems = () => {
     },
   };
 
+
   return (
     <section id="section-items" className="no-bottom">
       <div className="container" key={newItems}>
@@ -86,6 +87,7 @@ const NewItems = () => {
               </OwlCarousel>
             ))
           ) : (
+
             <OwlCarousel
               className=""
               loop
@@ -112,6 +114,34 @@ const NewItems = () => {
                         />
                         <i className="fa fa-check"></i>
                       </Link>
+
+          <OwlCarousel
+            className=""
+            loop
+            margin={10}
+            responsive={responsive}
+            items={4}
+            dots={false}
+            nav
+          >
+            {newItems.slice(0, 7).map((newItems, _) => (
+              <div className="" key={newItems.id}>
+                <div className="nft__item">
+                  <div className="author_list_pp">
+                    <Link
+                      to={`/author/${newItems.authorId}`}
+                      data-bs-toggle="tooltip"
+                      data-bs-placement="top"
+                      title="Creater: Monica Lucas"
+                    >
+                      <img className="lazy" src={newItems.authorImage} alt="" />
+                      <i className="fa fa-check"></i>
+                    </Link>
+                  </div>
+                  {newItems.expiryDate && (
+                    <div className="de_countdown">
+                      <CountdownTimer expiryDate={newItems.expiryDate}/>
+
                     </div>
                     {newItems.expiryDate && (
                       <div className="de_countdown">
