@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import AuthorImage from "../../images/author_thumbnail.jpg";
 import axios from "axios";
+import AOS from 'aos';
+import 'aos/dist/aos.css'; 
+AOS.init();
 
 const TopSellers = () => {
 
@@ -33,7 +35,7 @@ const TopSellers = () => {
               <div className="small-border bg-color-2"></div>
             </div>
           </div>
-          <div className="col-md-12">
+          <div className="col-md-12" data-aos="fade" data-aos-easing="1000">
             <ol className="author_list">
             {loading
                 ? new Array(12).fill(0).map((_, index) => (
@@ -51,7 +53,7 @@ const TopSellers = () => {
                   sellers.map((sellers) => (
                 <li key={sellers.id}>
                   <div className="author_list_pp">
-                    <Link to={`/author/${sellers.id}`}>
+                    <Link to={`/author/${sellers.authorId}`}>
                       <img
                         className="lazy pp-author"
                         src={sellers.authorImage}

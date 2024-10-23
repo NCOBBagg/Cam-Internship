@@ -9,6 +9,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 AOS.init();
 //Keep on Main branch
+
 const NewItems = () => {
   const [newItems, setNewItems] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -46,6 +47,8 @@ const NewItems = () => {
 
   return (
     <section id="section-items" className="no-bottom">
+      <div className="container">
+        <div className="row" data-aos="fade" data-aos-easing="1000">
       <div className="container" key={newItems}>
         <div className="row">
           <div className="col-lg-12">
@@ -134,6 +137,7 @@ const NewItems = () => {
                               <i className="fa fa-envelope fa-lg"></i>
                             </a>
                           </div>
+
                         </div>
                       </div>
                       <Link to={`/item-details/${newItems.nftId}`}>
@@ -155,6 +159,7 @@ const NewItems = () => {
                         <i className="fa fa-heart"></i>
                         <span>{newItems.likes}</span>
                       </div>
+
                     </div>
                   </div>
                 </div>
