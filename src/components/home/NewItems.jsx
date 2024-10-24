@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
-import OwlCarousel from "react-owl-carousel";
+import CountdownTimer from "../UI/CountdownTimer";
 import Skeleton from "react-loading-skeleton";
+import OwlCarousel from 'react-owl-carousel';
 import { FaCheckCircle } from "react-icons/fa";
 
-import "keen-slider/keen-slider.min.css";
-import { useKeenSlider } from "keen-slider/react";
 
 import CountdownTimer from "../UI/CountdownTimer";
 import AOS from 'aos';
@@ -32,7 +30,6 @@ const NewItems = () => {
     }
     fetchNewItems();
   }, []);
-
   const responsive = {
     1440: {
       items: 4,
@@ -48,14 +45,10 @@ const NewItems = () => {
     },
   };
 
-
-
   return (
     <section id="section-items" className="no-bottom">
-      <div className="container">
-        <div className="row" data-aos="fade" data-aos-easing="1000">
       <div className="container" key={newItems}>
-        <div className="row">
+        <div className="row" data-aos="fade" data-aos-easing="1000">
           <div className="col-lg-12">
             <div className="text-center">
               <h2>New Items</h2>
@@ -65,37 +58,6 @@ const NewItems = () => {
           {loading ? (
             new Array(4).fill(0).map((index) => (
               <OwlCarousel
-                className=""
-                loop
-                margin={10}
-                responsive={responsive}
-                items={4}
-                dots={false}
-                nav
-              >
-                <div className="card-skeleton" key={index}>
-                  <div className="circle__skeleton">
-                    <Skeleton circle width={40} height={40} />
-                  </div>
-                  <FaCheckCircle
-                    className="check-circle__skeleton"
-                    color="#8364E2"
-                  />
-                  <div className="left-col">
-                    <Skeleton square height={270} width={500} />
-                  </div>
-                  <div className="name__skeleton">
-                    <Skeleton width="40%" height={20} />
-                  </div>
-                  <div className="code__skeleton">
-                    <Skeleton width="80" height={20} />
-                  </div>
-                </div>
-              </OwlCarousel>
-            ))
-          ) : (
-
-            <OwlCarousel
               className=""
               loop
               margin={10}
@@ -104,140 +66,97 @@ const NewItems = () => {
               dots={false}
               nav
             >
-              {newItems.map((newItems) => (
-                <div className="" key={newItems.id}>
-                  <div className="nft__item">
-                    <div className="author_list_pp">
-                      <Link
-                        to={`/author/${newItems.authorId}`}
-                        data-bs-toggle="tooltip"
-                        data-bs-placement="top"
-                        title="Creater: Monica Lucas"
-                      >
-                        <img
-                          className="lazy"
-                          src={newItems.authorImage}
-                          alt=""
-                        />
-                        <i className="fa fa-check"></i>
-                      </Link>
-
+              <div className="card-skeleton" key={index}>
+                <div className="circle__skeleton">
+                  <Skeleton circle width={40} height={40} />
+                </div>
+                <FaCheckCircle
+                  className="check-circle__skeleton"
+                  color="#8364E2"
+                />
+                <div className="left-col">
+                  <Skeleton square height={270} width={500} />
+                </div>
+                <div className="name__skeleton">
+                  <Skeleton width="40%" height={20} />
+                </div>
+                <div className="code__skeleton">
+                  <Skeleton width="80" height={20} />
+                </div>
+              </div>
+            </OwlCarousel>
+          ))
+        ) : (
           <OwlCarousel
-            className=""
-            loop
-            margin={10}
-            responsive={responsive}
-            items={4}
-            dots={false}
-            nav
-          >
-            {newItems.slice(0, 7).map((newItems, _) => (
-              <div className="" key={newItems.id}>
-                <div className="nft__item">
-                  <div className="author_list_pp">
-                    <Link
-                      to={`/author/${newItems.authorId}`}
-                      data-bs-toggle="tooltip"
-                      data-bs-placement="top"
-                      title="Creater: Monica Lucas"
-                    >
-                      <img className="lazy" src={newItems.authorImage} alt="" />
-                      <i className="fa fa-check"></i>
-                    </Link>
-                  </div>
-                  {newItems.expiryDate && (
-                    <div className="de_countdown">
-                      <CountdownTimer expiryDate={newItems.expiryDate}/>
-
-                    </div>
-                    {newItems.expiryDate && (
+          className=""
+          loop
+          margin={10}
+          responsive={responsive}
+          items={4}
+          dots={false}
+          nav
+        >
+          {newItems.map((newItems) => (
+                <div className="" key={newItems.id}>
+              <div className="nft__item">
+                <div className="author_list_pp">
+                  <Link
+                    to={`/author/${newItems.authorId}`}
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="top"
+                    title="Creator: Monica Lucas"
+                  >
+                    <img className="lazy" src={newItems.authorImage} alt="" />
+                    <i className="fa fa-check"></i>
+                  </Link>
+                </div>
+                {newItems.expiryDate && (
                       <div className="de_countdown">
                         <CountdownTimer expiryDate={newItems.expiryDate} />
                       </div>
                     )}
-
-
-
-                  <div className="nft__item_wrap">
-                    <div className="nft__item_extra">
-                      <div className="nft__item_buttons">
-                        <button>Buy Now</button>
-                        <div className="nft__item_share">
-                          <h4>Share</h4>
-                          <a href="" target="_blank" rel="noreferrer">
-                            <i className="fa fa-facebook fa-lg"></i>
-                          </a>
-                          <a href="" target="_blank" rel="noreferrer">
-                            <i className="fa fa-twitter fa-lg"></i>
-                          </a>
-                          <a href="">
-                            <i className="fa fa-envelope fa-lg"></i>
-                          </a>
-
-                    <div className="nft__item_wrap">
-                      <div className="nft__item_extra">
-                        <div className="nft__item_buttons">
-                          <button>Buy Now</button>
-                          <div className="nft__item_share">
-                            <h4>Share</h4>
-                            <a href="" target="_blank" rel="noreferrer">
-                              <i className="fa fa-facebook fa-lg"></i>
-                            </a>
-                            <a href="" target="_blank" rel="noreferrer">
-                              <i className="fa fa-twitter fa-lg"></i>
-                            </a>
-                            <a href="">
-                              <i className="fa fa-envelope fa-lg"></i>
-                            </a>
-                          </div>
-
-                        </div>
+                <div className="nft__item_wrap">
+                  <div className="nft__item_extra">
+                    <div className="nft__item_buttons">
+                      <button>Buy Now</button>
+                      <div className="nft__item_share">
+                        <h4>Share</h4>
+                        <a href="" target="_blank" rel="noreferrer">
+                          <i className="fa fa-facebook fa-lg"></i>
+                        </a>
+                        <a href="" target="_blank" rel="noreferrer">
+                          <i className="fa fa-twitter fa-lg"></i>
+                        </a>
+                        <a href="">
+                          <i className="fa fa-envelope fa-lg"></i>
+                        </a>
                       </div>
-
-
-                    <Link to={`/item-details/${newItems.nftId}`}>
-                      <img
-                        src={newItems.nftImage}
-                        className="lazy nft__item_preview"
-                        alt=""
-                      />
-                    </Link>
+                    </div>
                   </div>
-                  <div className="nft__item_info">
-                    <Link to={`/item-details/${newItems.nftId}`}>
-                      <h4>{newItems.title}</h4>
-                    </Link>
-                    <div className="nft__item_price">{newItems.price} ETH</div>
-                    <div className="nft__item_like">
-                      <i className="fa fa-heart"></i>
-                      <span>{newItems.likes}</span>
 
-                      <Link to={`/item-details/${newItems.nftId}`}>
-                        <img
-                          src={newItems.nftImage}
-                          className="lazy nft__item_preview"
-                          alt=""
-                        />
-                      </Link>
-                    </div>
-                    <div className="nft__item_info">
-                      <Link to="/item-details">
-                        <h4>{newItems.title}</h4>
-                      </Link>
-                      <div className="nft__item_price">
-                        {newItems.price} ETH
-                      </div>
-                      <div className="nft__item_like">
-                        <i className="fa fa-heart"></i>
-                        <span>{newItems.likes}</span>
-                      </div>
-
-                    </div>
+                  <Link to={`/item-details/${newItems.nftId}`}>
+                    <img
+                      src={newItems.nftImage}
+                      className="lazy nft__item_preview"
+                      alt=""
+                    />
+                  </Link>
+                </div>
+                <div className="nft__item_info">
+                  <Link to={`/item-details/${newItems.nftId}`}>
+                    <h4>{newItems.title}</h4>
+                  </Link>
+                  <div className="nft__item_price">{newItems.price} ETH</div>
+                  <div className="nft__item_like">
+                    <i className="fa fa-heart"></i>
+                    <span>{newItems.likes}</span>
                   </div>
                 </div>
-              ))}
-            </OwlCarousel>
-          )}
+              </div>
+            </div>
+          ))}
+          </OwlCarousel>
+        )}
         </div>
       </div>
     </section>
