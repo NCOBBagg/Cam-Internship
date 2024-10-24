@@ -49,8 +49,6 @@ const NewItems = () => {
     <section id="section-items" className="no-bottom">
       <div className="container">
         <div className="row" data-aos="fade" data-aos-easing="1000">
-      <div className="container" key={newItems}>
-        <div className="row">
           <div className="col-lg-12">
             <div className="text-center">
               <h2>New Items</h2>
@@ -137,7 +135,6 @@ const NewItems = () => {
                               <i className="fa fa-envelope fa-lg"></i>
                             </a>
                           </div>
-
                         </div>
                       </div>
                       <Link to={`/item-details/${newItems.nftId}`}>
@@ -159,7 +156,6 @@ const NewItems = () => {
                         <i className="fa fa-heart"></i>
                         <span>{newItems.likes}</span>
                       </div>
-
                     </div>
                   </div>
                 </div>
