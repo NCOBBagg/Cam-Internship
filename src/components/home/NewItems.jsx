@@ -4,12 +4,11 @@ import CountdownTimer from "../UI/CountdownTimer";
 import Skeleton from "react-loading-skeleton";
 import OwlCarousel from 'react-owl-carousel';
 import { FaCheckCircle } from "react-icons/fa";
-
-
 import CountdownTimer from "../UI/CountdownTimer";
-import AOS from 'aos';
-import 'aos/dist/aos.css'; 
+import AOS from "aos";
+import "aos/dist/aos.css";
 AOS.init();
+//Keep on Main branch
 
 const NewItems = () => {
   const [newItems, setNewItems] = useState([]);
